@@ -1,15 +1,15 @@
-
 package tests;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.selector.ByText;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Selectors.byXpath;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.files.DownloadActions.click;
 
 public class PracticeForm {
 
@@ -17,10 +17,9 @@ public class PracticeForm {
     static void beforeAll() {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.timeout = 15000;
+        //Configuration.timeout = 15000;
         Configuration.pageLoadStrategy = "eager";
-        Configuration.holdBrowserOpen = false;
-
+        Configuration.holdBrowserOpen = true;
     }
 
     @Test
@@ -29,11 +28,45 @@ public class PracticeForm {
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
 
-        //ввод значений
+        //Student Registration Form
         $("#firstName").setValue("Shak");
-        $("#lastName").setValue("Svetlov");
-        $("#userEmail").setValue("shak.svet@gmail.ru");
+        $("#lastName").setValue("Montan");
         $("#genterWrapper").$(byText("Female")).click();
         $("#userNumber").setValue("0000000001");
- }
+        $("#userEmail").setValue("montana90@gmail.ru");
+
+        //Date of Birth
+        $("#dateOfBirthInput").click();
+        $(".react-datepicker__year-select").$(byText("1996")).click();
+        $(".react-datepicker__month-select").$(byText("November")).click();
+        $(".react-datepicker__month").$(byText("11")).click();
+
+        //Subjects
+        $(".subjects-auto-complete__input").click();
+        $("[aria-autocomplete=list").sendKeys("n");
+        $(byText("English")).click();
+        //Hobbies
+        $("#hobbiesWrapper").$(byText("Music")).click();
+        //Picture
+        $("#uploadPicture").uploadFromClasspath("image.png");
+        //State and City
+        $("#stateCity-wrapper").click();
+        $("#state").$(byText("Haryana")).click();
+        $("#city").click();
+        $(byText("Karnal")).click();
+
+        $("#submit").click();
+        // Table
+        $(".table-responsive").$(byText("Student Name")).closest("tr").shouldHave(text("Shak Montan"));
+        $(".table-responsive").$(byText("Student Email")).closest("tr").shouldHave(text("montana90@gmail.ru"));
+        $(".table-responsive").$(byText("Gender")).closest("tr").shouldHave(text("Female"));
+        $(".table-responsive").$(byText("Mobile")).closest("tr").shouldHave(text("0000000001"));
+        $(".table-responsive").$(byText("Date of Birth")).closest("tr").shouldHave(text("11 November,1996"));
+        $(".table-responsive").$(byText("Subjects")).closest("tr").shouldHave(text("English"));
+        $(".table-responsive").$(byText("Hobbies")).closest("tr").shouldHave(text("Music"));
+        $(".table-responsive").$(byText("Picture")).closest("tr").shouldHave(text("image.png"));
+        $(byXpath("//td[text()='Address']/following-sibling::td")).shouldHave(exactText(""));
+        $(".table-responsive").$(byText("State and City")).closest("tr").shouldHave(text("Haryana Karnal"));
+        $("#closeLargeModal").click();
+    }
 }
