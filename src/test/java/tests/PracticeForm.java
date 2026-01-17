@@ -4,9 +4,6 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Selectors.byXpath;
-
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -19,7 +16,7 @@ public class PracticeForm {
         Configuration.baseUrl = "https://demoqa.com";
         //Configuration.timeout = 15000;
         Configuration.pageLoadStrategy = "eager";
-        Configuration.holdBrowserOpen = true;
+        Configuration.holdBrowserOpen = false;
     }
 
     @Test
@@ -65,7 +62,8 @@ public class PracticeForm {
         $(".table-responsive").$(byText("Subjects")).closest("tr").shouldHave(text("English"));
         $(".table-responsive").$(byText("Hobbies")).closest("tr").shouldHave(text("Music"));
         $(".table-responsive").$(byText("Picture")).closest("tr").shouldHave(text("image.png"));
-        $(byXpath("//td[text()='Address']/following-sibling::td")).shouldHave(exactText(""));
+        // Убеждаемся, что после "Address" сразу идёт "State and City"
+        $(".table-responsive").shouldHave(text("Address\nState and City"));
         $(".table-responsive").$(byText("State and City")).closest("tr").shouldHave(text("Haryana Karnal"));
         $("#closeLargeModal").click();
     }
