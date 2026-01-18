@@ -14,7 +14,6 @@ public class PracticeForm {
     static void beforeAll() {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
-        //Configuration.timeout = 15000;
         Configuration.pageLoadStrategy = "eager";
         Configuration.holdBrowserOpen = false;
     }
@@ -46,6 +45,9 @@ public class PracticeForm {
         $("#hobbiesWrapper").$(byText("Music")).click();
         //Picture
         $("#uploadPicture").uploadFromClasspath("image.png");
+        //Address
+        $("#currentAddress").setValue("IN, Karnal, Haryana, 132001, Street No. 12, Mangalpur, Kunjpura Road");
+
         //State and City
         $("#stateCity-wrapper").click();
         $("#state").$(byText("Haryana")).click();
@@ -62,8 +64,7 @@ public class PracticeForm {
         $(".table-responsive").$(byText("Subjects")).closest("tr").shouldHave(text("English"));
         $(".table-responsive").$(byText("Hobbies")).closest("tr").shouldHave(text("Music"));
         $(".table-responsive").$(byText("Picture")).closest("tr").shouldHave(text("image.png"));
-        // Убеждаемся, что после "Address" сразу идёт "State and City"
-        $(".table-responsive").shouldHave(text("Address\nState and City"));
+        $(".table-responsive").$(byText("Address")).closest("tr").shouldHave(text("IN, Karnal, Haryana, 132001, Street No. 12, Mangalpur, Kunjpura Road"));
         $(".table-responsive").$(byText("State and City")).closest("tr").shouldHave(text("Haryana Karnal"));
         $("#closeLargeModal").click();
     }
