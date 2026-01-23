@@ -17,17 +17,18 @@ public class TextBoxTest {
     @Test
     void fillTextBoxFormTest() {
         new TextBoxPage()
-                .open("/text-box")
+                .openPage()
                 .setFullName("Shak Montan")
                 .setEmail("montana90@gmail.ru")
                 .setCurrentAddress("001 Haryana Karnal")
                 .setPermanentAddress("Same as current")
-                .submit()
-                .checkOutput(
-                        "Shak Montan",
-                        "montana90@gmail.ru",
-                        "001 Haryana Karnal",
-                        "Same as current"
-                );
+                .submit();
+
+        new TextBoxPage().checkOutput(
+                "Shak Montan",
+                "montana90@gmail.ru",
+                "001 Haryana Karnal",
+                "Same as current"
+        );
     }
 }

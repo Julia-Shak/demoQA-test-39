@@ -1,9 +1,12 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+
+import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
-//import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.open;
+
 public class TextBoxPage {
 
     private final SelenideElement
@@ -13,16 +16,13 @@ public class TextBoxPage {
             permanentAddressTextarea = $("#permanentAddress"),
             submitButton = $("#submit");
 
-    public TextBoxPage  open(String s) {
+    public TextBoxPage  openPage() {
 
-       /* com.codeborne.selenide.Selenide.open("/text-box");
-        executeJavaScript("$('#fixedban').remove()");
-        executeJavaScript("$('footer').remove()");
-        return this; */
         open("/text-box");
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
         return this;
+
     }
 
     public TextBoxPage setFullName(String name) {
@@ -53,8 +53,11 @@ public class TextBoxPage {
     public TextBoxPage checkOutput(String fullName, String email, String currentAddr, String permAddr) {
         $("#name").shouldHave(text("Name:" + fullName));
         $("#email").shouldHave(text("Email:" + email));
-        $("#currentAddress").shouldHave(text("Current Address :" + currentAddr));
-        $("#permanentAddress").shouldHave(text("Permananet Address :" + permAddr));
+
+        // Проверяем АТРИБУТ value, а не текст
+        $("#currentAddress").shouldHave(attribute("value", currentAddr));
+        $("#permanentAddress").shouldHave(attribute("value", permAddr));
+
         return this;
     }
 }
