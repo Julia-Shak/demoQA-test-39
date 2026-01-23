@@ -63,7 +63,6 @@ public class PracticeFormPage {
         $$(".react-datepicker__day").findBy(text(day)).click();
         return this;
     }
-
     public PracticeFormPage addSubject(String subject) {
         subjectsInput.click();
         subjectsInput.setValue(subject).pressEnter();

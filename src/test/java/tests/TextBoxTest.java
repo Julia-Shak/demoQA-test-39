@@ -23,7 +23,6 @@ public class TextBoxTest {
                 .setCurrentAddress("001 Haryana Karnal")
                 .setPermanentAddress("Same as current")
                 .submit();
-
         new TextBoxPage().checkOutput(
                 "Shak Montan",
                 "montana90@gmail.ru",
