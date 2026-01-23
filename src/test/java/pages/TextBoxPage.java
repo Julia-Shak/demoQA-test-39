@@ -3,7 +3,7 @@ package pages;
 import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
-
+import static com.codeborne.selenide.Selenide.open;
 public class TextBoxPage {
 
     private final SelenideElement
@@ -13,8 +13,13 @@ public class TextBoxPage {
             permanentAddressTextarea = $("#permanentAddress"),
             submitButton = $("#submit");
 
-    public TextBoxPage  openPage(String s){
-        openPage("/text-box");
+    public TextBoxPage  open(String s) {
+
+       /* com.codeborne.selenide.Selenide.open("/text-box");
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
+        return this; */
+        open("/text-box");
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
         return this;

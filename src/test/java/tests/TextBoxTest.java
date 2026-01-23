@@ -17,7 +17,7 @@ public class TextBoxTest {
     @Test
     void fillTextBoxFormTest() {
         new TextBoxPage()
-                .openPage("/text-box")
+                .open("/text-box")
                 .setFullName("Shak Montan")
                 .setEmail("montana90@gmail.ru")
                 .setCurrentAddress("001 Haryana Karnal")
