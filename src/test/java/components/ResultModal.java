@@ -15,7 +15,6 @@ public class ResultModal {
         modalTable.$(byText("State and City")).closest("tr").shouldHave(text(stateAndCity));
         return this;
     }
-
     public void close() {
         $("#closeLargeModal").click();
     }

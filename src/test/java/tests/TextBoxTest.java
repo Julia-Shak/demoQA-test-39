@@ -13,7 +13,6 @@ public class TextBoxTest {
         Configuration.browserSize = "1920x1080";
         Configuration.pageLoadStrategy = "eager";
     }
-
     @Test
     void fillTextBoxFormTest() {
         new TextBoxPage()
