@@ -17,7 +17,6 @@ public class PracticeFormTest {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = "1920x1080";
         Configuration.pageLoadStrategy = "eager";
-        //Configuration.holdBrowserOpen(false);
     }
 
     @Test
@@ -25,6 +24,7 @@ public class PracticeFormTest {
         // Только обязательные поля: First Name, Last Name, Gender, Mobile
         new PracticeFormPage()
                 .openPage()
+                .removeBanners()
                 .setFirstName("Min")
                 .setLastName("User")
                 .selectGenderFemale()
@@ -44,6 +44,7 @@ public class PracticeFormTest {
     void fullFormSubmissionTest() {
         new PracticeFormPage()
                 .openPage()
+                .removeBanners()
                 .setFirstName("Shak")
                 .setLastName("Montan")
                 .setEmail("montana90@gmail.ru")
@@ -76,6 +77,7 @@ public class PracticeFormTest {
     void negativeEmailTest() {
         new PracticeFormPage()
                 .openPage()
+                .removeBanners()
                 .setFirstName("Bad")
                 .setLastName("Email")
                 .setEmail("invalid-email") // ← невалидный email (нет @)
@@ -91,6 +93,7 @@ public class PracticeFormTest {
    void negativeMobileTooShortTest() {
        new PracticeFormPage()
                .openPage()
+               .removeBanners()
                .setFirstName("Short")
                .setLastName("Number")
                .setEmail("short@num.com")
@@ -98,10 +101,8 @@ public class PracticeFormTest {
                .setMobile("123456789") // ← 9 цифр → невалидно
                .submit();
 
-       // Проверяем, что модалка НЕ появилась
+       // Проверяем, модалка НЕ появилась
        $(".modal-control").shouldNot(exist);
 
     }
-
-
 }

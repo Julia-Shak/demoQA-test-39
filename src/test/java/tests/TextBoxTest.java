@@ -13,11 +13,11 @@ public class TextBoxTest {
         Configuration.browserSize = "1920x1080";
         Configuration.pageLoadStrategy = "eager";
     }
-
     @Test
     void fillTextBoxFormTest() {
         new TextBoxPage()
                 .openPage()
+                .removeBanners()
                 .setFullName("Shak Montan")
                 .setEmail("montana90@gmail.ru")
                 .setCurrentAddress("001 Haryana Karnal")

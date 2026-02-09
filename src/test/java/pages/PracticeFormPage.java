@@ -2,12 +2,11 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import components.DatePicker;
 
 public class PracticeFormPage {
-
     // Поля формы
     private final SelenideElement
             firstName = $("#firstName"),
@@ -26,6 +25,10 @@ public class PracticeFormPage {
 
     public PracticeFormPage openPage() {
         open("/automation-practice-form");
+        return this;
+    }
+
+    public PracticeFormPage removeBanners() {
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
         return this;
@@ -55,14 +58,14 @@ public class PracticeFormPage {
         userNumber.setValue(number);
         return this;
     }
+    private final DatePicker datePicker = new DatePicker();
 
     public PracticeFormPage setDateOfBirth(String day, String month, String year) {
         dateOfBirthInput.click();
-        $(".react-datepicker__year-select").selectOption(year);
-        $(".react-datepicker__month-select").selectOption(month);
-        $$(".react-datepicker__day").findBy(text(day)).click();
+        datePicker.setDate(day, month, year);
         return this;
     }
+
     public PracticeFormPage addSubject(String subject) {
         subjectsInput.click();
         subjectsInput.setValue(subject).pressEnter();
