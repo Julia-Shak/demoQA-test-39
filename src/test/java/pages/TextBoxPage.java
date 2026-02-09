@@ -14,13 +14,15 @@ public class TextBoxPage {
             permanentAddressTextarea = $("#permanentAddress"),
             submitButton = $("#submit");
 
-    public TextBoxPage  openPage() {
 
+    public TextBoxPage openPage() {
         open("/text-box");
+        return this;
+    }
+    public TextBoxPage removeBanners() {
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
         return this;
-
     }
 
     public TextBoxPage setFullName(String name) {
